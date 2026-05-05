@@ -6,7 +6,7 @@ set -euxo pipefail
 #############################################
 sudo dnf update -y
 
-##############################################
+#############################################
 # Install base tools
 # Do not install curl explicitly on AL2023;
 # curl-minimal is usually already installed.
