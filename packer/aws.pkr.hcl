@@ -40,12 +40,6 @@ build {
   sources = ["source.amazon-ebs.amazon_linux_2023"]
 
   provisioner "shell" {
-    inline = [
-      "sudo dnf update -y",
-      "sudo dnf install -y git wget unzip",
-      "sudo dnf install -y docker",
-      "sudo systemctl enable docker",
-      "sudo systemctl start docker"
-    ]
+    script = "scripts/provisioner.sh"
   }
 }
