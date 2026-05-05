@@ -29,6 +29,13 @@ source "amazon-ebs" "amazon_linux_2023" {
 
   ami_name = "golden-ami-al2023-{{timestamp}}"
 
+  launch_block_device_mappings {
+    device_name           = "/dev/xvda"
+    volume_size           = 20
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
+
   tags = {
     Name        = "golden-ami-al2023"
     CreatedBy   = "Packer"
