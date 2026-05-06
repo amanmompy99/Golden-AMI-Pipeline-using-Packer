@@ -13,6 +13,10 @@ Instead of manually configuring EC2 instances, Jenkins triggers an automated Pac
 
 # Architecture
 
+![Architecture Diagram](diagrams/Architecture.png)
+
+
+
 ```mermaid
 flowchart LR
     A[Developer] --> B[GitHub Repository]
@@ -95,15 +99,13 @@ Golden-AMI-Pipeline-using-Packer/
 ├── Jenkinsfile
 │
 ├── packer/
-│   └── golden-ami.pkr.hcl
+│   └── aws.pkr.hcl
 │
 ├── ansible/
 │   ├── playbook.yml
-│   ├── inventory.ini
-│   └── roles/
 │
-├── userdata/
-│   └── jenkins-userdata.sh
+├── scripts/
+│   └── provisioner.sh
 │
 ├── diagrams/
 │   └── architecture.png
