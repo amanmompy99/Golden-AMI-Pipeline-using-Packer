@@ -13,6 +13,9 @@ Instead of manually configuring EC2 instances, Jenkins triggers an automated Pac
 
 # Architecture
 
+![Architecture Diagram](diagrams/Architecture.png)
+
+
 ```mermaid
 flowchart LR
     A[Developer] --> B[GitHub Repository]
