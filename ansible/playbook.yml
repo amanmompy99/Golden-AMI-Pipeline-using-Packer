@@ -1,0 +1,52 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update packages (dnf on AL2023)
+      dnf:
+        name: "*"
+        state: latest
+    - name: Install Git client
+      dnf:
+        name: git
+        state: present
+    - name: Install Docker
+      dnf:
+        name: docker
+        state: present
+    - name: Enable and start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Add ec2-user to Docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+    - name: Install SSM Agent (native package on AL2023)
+      dnf:
+        name: amazon-ssm-agent
+        state: present
+    - name: Enable and start SSM Agent
+      service:
+        name: amazon-ssm-agent
+        state: started
+        enabled: yes
+    - name: Install CloudWatch Agent
+      dnf:
+        name: amazon-cloudwatch-agent
+        state: present
+    - name: Disable root login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+    - name: Disable password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+    - name: Restart SSH
+      service:
+        name: sshd
+        state: restarted
